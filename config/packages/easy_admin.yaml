@@ -1,0 +1,12 @@
+easy_admin:
+    entities:
+        TarifsPrestations:
+            class: App\Entity\TarifsPrestations
+        TypeDemande:
+            class: App\Entity\TypeDemande
+        TypeFichier:
+            class: App\Entity\TypeFichier
+        Fichier:
+            class: App\Entity\Fichier
+        Documents:
+            class: App\Entity\Documents

@@ -1,0 +1,103 @@
+<div class="row search col-12">
+	<div class="col-12 search-titre mt-5">
+		<h2>Calculez le prix de votre
+			<br>certificat d'immatriculation</h2>
+	</div>
+
+	<div class="col-12 search-titre">
+<p class="col-8 mx-auto text-center text-uppercase">
+Saisissez votre plaque d'immatriculation ainsi que votre département afin de pouvoir calculer une estimation du prix de votre carte grise.
+</p>
+	</div>
+
+	<div id="Changement-de-titulaire" class="col-12">
+		<div class="search">
+
+			<form method="POST" id="formecgauto">
+				<div class="col-12 mx-auto search-box bg-dark">
+					<div class="row col-12 mx-auto input-group ">
+						<label for="Immatriculation" class="col-12 search-box--titre">Numero d'Immatriculation</label>
+						<input
+							class="col-10 col-md-8 col-lg-4 col-xl-3 mx-auto form-control search-form"
+							onkeyup="this.value = this.value.toUpperCase();"
+							placeholder="AB-123-CD ou 1234 AB 56 "
+							pattern="[0-9]{1,4} [A-Z]{1,4} [0-9]{1,2}|[A-Z]{1,2}-[0-9]{1,3}-[A-Z]{1,2}"
+							name="Immatriculation"
+							id="Immatriculation">
+					</div>
+				</div>
+				<div class="col-12 mx-auto search-box mt-5">
+					<div class="row col-12 mx-auto input-group ">
+						<label for="Departement" class="col-12 search-box--titre">Departement d'immatriculation</label>
+						<input type="text" class="col-10 col-md-8 col-lg-4 col-xl-3 mx-auto search-form" name="Departement" id="Departement" pattern="[0-9,A-B]{2,3}" maxlength="3" minlength="2">
+					</div>
+				</div>
+				<div class="col-12 col-md-6 mx-auto text-center search-box ">
+					<div class="row col-12 mx-auto input-group mb-lg-3 mt-5">
+						<div class="g-recaptcha mx-auto" data-sitekey="6Ld4N5IUAAAAANG1rR1EhGuQdTnWrjQkgSnoyqDt"></div>
+					</div>
+				</div>
+				<div class="col-12 col-md-6 mx-auto text-center search-box">
+					<button type="submit" class="btn btn-primary btn-sm mx-auto">COMMANDER</button>
+				</div>
+
+			</form>
+
+			<div id="resultecg"></div>
+
+		</div>
+	</div>
+
+	<div id="resultecg"></div>
+
+</div>
+
+
+<div id="resultform"></div>
+{% block javascripts %}
+	<script src="https://code.jquery.com/jquery-3.2.1.js" crossorigin="anonymous"></script>
+
+<script>
+
+    $('#formecgauto').on('submit',function(e) {
+
+            e.preventDefault();
+            dataseri = $(this).serialize();
+            console.log(dataseri);
+            $.ajax({
+                url: 'incphp/submitECGAUTO.php',
+                type: 'POST',
+                data: dataseri,
+                success: function(data) {
+                    console.log(data);
+                    console.log("test submit form");
+                    $('#resultform').html(data);
+                }               
+            });
+        });
+
+    </script>
+
+	
+{% endblock %}
+{#<script>
+		var jQuerynotmin = $.noConflict( true );
+	</script>
+	<script>
+
+		jQuerynotmin( '#formecgauto' ).on( 'submit', function ( e ) {
+			e.preventDefault();
+			dataseri2 = $( this ).serialize();
+			console.log( dataseri2 );
+			$.ajax( {
+				url: 'incphp/submitECGAUTO.php',
+				type: 'POST',
+				data: dataseri2,
+				success: function ( data ) {
+					console.log( data );
+					console.log( "test submit form" );
+					$( '#resultecg' ).html( data );
+				}
+			} );
+		} );
+	</script>#}
